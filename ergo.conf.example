@@ -1,0 +1,3 @@
+some-site.local/api --> localhost:8080
+some-site.local --> localhost:7777
+(img|file).some-site.local/[a-f0-9]+ --> localhost:5555
