@@ -27,24 +27,6 @@ func main() {
 
 	proxy := ConfiguredProxy(*config)
 
-	//server := &http.Server{
-	//	Addr: ":2000",
-	//	Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	//		if r.Method == http.MethodConnect {
-	//			handleTunneling(w, r)
-	//		} else {
-	//			handleHTTP(w, r)
-	//		}
-	//	}),
-	//	// Disable HTTP/2.
-	//	TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler)),
-	//}
-	//log.Fatal(server.ListenAndServe())
-
-	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-	//	proxy.ServeHTTP(w, r)
-	//})
-
 	log.Fatal(http.ListenAndServe(":"+ERGO_PORT, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		proxy.ServeHTTP(w, r)
 	})))
