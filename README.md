@@ -1,4 +1,4 @@
-# Ergo
+# Ergo [![](https://images.microbadger.com/badges/image/ontrif/ergo.svg)](https://microbadger.com/images/ontrif/ergo) [![](https://images.microbadger.com/badges/version/ontrif/ergo.svg)](https://microbadger.com/images/ontrif/ergo)
 Simple http proxy for accessing virtual domains such as `*.test` and `*.local` and exposing microservices as single api 
 during development.
 
