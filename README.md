@@ -1,8 +1,13 @@
 # Ergo [![](https://images.microbadger.com/badges/image/ontrif/ergo.svg)](https://microbadger.com/images/ontrif/ergo) [![](https://images.microbadger.com/badges/version/ontrif/ergo.svg)](https://microbadger.com/images/ontrif/ergo)
-Simple http proxy for accessing virtual domains such as `*.test` and `*.local` and exposing microservices as single api 
-during development.
+<img align="left" src="http://i61.beon.ru/67/83/108367/24/4083124/ergo_proxy10.gif"> 
 
-Name and idea inspired by [cristianoliveira/ergo](https://github.com/cristianoliveira/ergo) project and "Ergo Proxy" anime.
+Simple http proxy for accessing virtual domains such as `*.test` and `*.local` and exposing microservices as single api during development.
+
+The proxy can be used to organize local projects. You can create your own domain name for each local project and simply add it to the ergo config. If you configure ergo as a web proxy in your browser, this will be enough and the `/etс/hosts` will not need to be edited.
+
+Name and idea are inspired by [cristianoliveira/ergo](https://github.com/cristianoliveira/ergo) project and the "Ergo Proxy" anime.
+
+My project is simpler, but it supports redirects based on regular expressions on the full request URL, which allows you to expose different microservices on single domain as unioned api.
 
 ## Features
 * can be used as usual reverse proxy (`/etc/hosts` for virtual domains) or http-proxy.
