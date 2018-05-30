@@ -10,7 +10,7 @@ Name and idea are inspired by [cristianoliveira/ergo](https://github.com/cristia
 My project is simpler, but it supports redirects based on regular expressions on the full request URL, which allows you to expose different microservices on single domain as unioned api.
 
 ## Features
-* can be used as usual reverse proxy (`/etc/hosts` for virtual domains) or http-proxy.
+* can be used as usual reverse proxy (`/etc/hosts` for virtual domains) or http-proxy (no editing is needed for the `/etc/hosts` file).
 * websockets support
 * simple config based on regexps
 
@@ -18,26 +18,25 @@ My project is simpler, but it supports redirects based on regular expressions on
 The main idea of this proxy is proxying http traffic to different backends based on URL. 
 It is very similar to plain reverse proxy but in additional to that ergo can be used as usual http-proxy for browser.
 
-Example config for independent frontend and backend which are implemented as separate projects:
+Example ergo config for independent frontend (`localhost:8080`) and backend api (`localhost:7777`) which are implemented as separate projects can be as follows:
 ```
 some-site.local/api --> localhost:7777
 some-site.local --> localhost:8080
 ```
 
-For browser configured to use http proxy `localhost:2000` (default ergo port)  we can access this URL's:
+For browser configured to use http proxy `localhost:2000` (`2000` is default ergo's listen port) we can access this URL's:
 1. `http://some-site.local/some/url` which will be internally redirected by ergo to `http://localhost:8080/some/url`
 2. `http://some-site.local/api/some/url` which will be redirected to `http://localhost:7777/api/some/url`
 
-**NOTE:** order of rules in config important!
+**NOTE:** order of rules in config important! Each regexp will be searched in request URL and first matched rule will be used!
 
-For real usage consider to use smart-proxy-selector plugins for your browser (such as FoxyProxy, SwitchyOmega, friGate etc.)
-and configure ergo proxy usage only for your local dev domains (such as `*.local`, `*.test` etc.)
+For real-world usage consider to use smart-proxy-selector plugins for your browser (such as FoxyProxy, SwitchyOmega, friGate etc.) Configure ergo proxy usage only for your local dev domains (such as `*.local`, `*.test` etc.)
 
-**NOTE:** don't use `*.dev` domain due to browsers builtin HSTS rules ([see more](https://stackoverflow.com/a/47768411)). 
+**NOTE:** don't use `*.dev` domain due to browsers builtin HSTS rules ([read more here](https://stackoverflow.com/a/47768411)). 
 
 ## Motivation
 I want easy-configurable regexp-based proxy which can be configured to merge different microservices at different entry-points
-on the same domain. Also I want source code for this proxy to be as simple as possible.
+on the same domain. Also I want source code for this proxy to be as simple as possible. And of course writing ergo was fun.
 
 ## TODO
 1. `CONNECT` method code improvement
