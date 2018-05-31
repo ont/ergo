@@ -10,12 +10,12 @@ import (
 func NewWebProxy(rules *Rules) http.Handler {
 	return &httputil.ReverseProxy{
 		Director: func(req *http.Request) {
-			host := rules.Find(req)
+			target, host := rules.Find(req)
 
 			// TODO: add SSL-to-noSSL support (SSL termination)
 			// req.URL.Scheme = turl.Scheme
 
-			req.URL.Host = host
+			req.URL.Host = target
 			req.Host = host
 
 			log.WithField("url", req.URL.String()).Debug("overwritten URL")

@@ -11,19 +11,19 @@ import (
 
 func NewTunnelProxy(rules *Rules, isConnect bool) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var host string
+		var target string
 
 		if isConnect {
 			// TODO: better solution with w.WriteHeader(http.StatusOK) + internal roundrip handling after hijack
-			host = "localhost:" + ERGO_PORT // connect to self for further upstream selection by rules
+			target = "localhost:" + ERGO_PORT // connect to self for further upstream selection by rules
 		} else {
-			host = rules.Find(r)
+			target, _ = rules.Find(r)
 		}
 
-		dst, err := net.DialTimeout("tcp", host, 10*time.Second)
+		dst, err := net.DialTimeout("tcp", target, 10*time.Second)
 		if err != nil {
 			http.Error(w, "Error contacting backend server.", 500)
-			log.WithError(err).WithField("target", host).Error("Error dialing tunnel backend")
+			log.WithError(err).WithField("target", target).Error("Error dialing tunnel backend")
 			return
 		}
 
